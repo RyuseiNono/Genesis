@@ -26,14 +26,16 @@ def main():
         show_viewer=args.vis,
         rigid_options=gs.options.RigidOptions(
             dt=0.01,
-            gravity=(0.0, 0.0, -10.0),
+            gravity=(0.0, 0.0, -9.81),
         ),
     )
 
     ########################## entities ##########################
     plane = scene.add_entity(gs.morphs.Plane())
     r0 = scene.add_entity(
-        gs.morphs.MJCF(file="xml/franka_emika_panda/panda.xml"),
+        # gs.morphs.MJCF(file="xml/franka_emika_panda/panda.xml"),
+        # gs.morphs.URDF(file="urdf/drones/cf2x.urdf"),
+        gs.morphs.URDF(file="crane.urdf"),
     )
 
     ########################## build ##########################
@@ -57,8 +59,8 @@ def run_sim(scene, enable_vis):
         t_now = time()
         print(1 / (t_now - t_prev), "FPS")
         t_prev = t_now
-        if i > 200:
-            break
+        # if i > 200:
+        #     break
 
     if enable_vis:
         scene.viewer.stop()
